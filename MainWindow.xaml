@@ -1,0 +1,77 @@
+﻿<fw:AcrylicWindow x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+                  Height="350"  
+                  ResizeMode="NoResize"  
+                  Width="700" 
+                  AcrylicWindowStyle="NoIcon" 
+                  fw:AcrylicWindow.Enabled="True">
+    <DockPanel>
+        <ListBox x:Name="FontList" 
+                fw:PointerTracker.Enabled="True"
+                DataContext="{x:Static Fonts.SystemFontFamilies}"
+                DockPanel.Dock="Right" 
+                Background="Transparent"
+                Padding="1"
+                BorderThickness="0"
+                ItemsSource="{Binding}"
+                Width="218" Margin="0,0,0,-0.2">
+            <ListBox.ToolTip>
+                <ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Count, Mode=OneTime}"/>
+                        <TextBlock Text="fonts are installed."/>
+                    </StackPanel>
+                </ToolTip>
+            </ListBox.ToolTip>
+        </ListBox>
+        <StackPanel Orientation="Horizontal"  
+                    HorizontalAlignment="Center" 
+                    Margin="254,5,3,5"
+                    DockPanel.Dock="Top" Width="162">
+            <TextBlock 
+                Margin="0 0 5 0" 
+                HorizontalAlignment="Left" 
+                Width="55" 
+                Padding="5">Font size:</TextBlock>
+            <xctk:IntegerUpDown x:Name="FontSize"
+                                Height="20" 
+                                Width="100"
+                                BorderThickness="0"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                Increment="1" 
+                                Value="25">
+            </xctk:IntegerUpDown>
+        </StackPanel>
+
+        <TextBlock Text="{Binding ElementName=SampleText, Path=Text}"
+                   FontFamily="{Binding ElementName=FontList,Path=SelectedItem}"
+                   FontSize="{Binding ElementName=FontSize,Path=Value}"
+                   TextWrapping="Wrap"
+                   Padding="10"
+                   DockPanel.Dock="Left" 
+                   Margin="0,-20,0,10" 
+                   Width="250"/>
+        <TextBox x:Name="SampleText"
+                 BorderThickness="0"
+                 Background="Transparent"
+                 TextWrapping="Wrap"
+                 DockPanel.Dock="Right" 
+                 FontSize="18"  
+                 Width="160" 
+                 Margin="0,0,0,10" 
+                 SelectionBrush="#FFE2E2E2" 
+                 Foreground="#FF555552" Text="Write output here.">
+            <TextBox.ToolTip>
+                <ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Write text here"/>
+                    </StackPanel>
+                </ToolTip>
+            </TextBox.ToolTip>
+        </TextBox>
+    </DockPanel>
+</fw:AcrylicWindow>
